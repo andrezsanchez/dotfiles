@@ -133,7 +133,7 @@ alias tmux="tmux -2"
 
 # firefox addon development
 ff-dev() {
-  ORIGINAL_CWD=$CWD
+  ORIGINAL_CWD=$PWD
   cd code/etc/addon-sdk
   source bin/activate
   cd $ORIGINAL_CWD
