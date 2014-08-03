@@ -1,0 +1,7 @@
+[user]
+	email = andrezacsanchez@gmail.com
+	name = Andre Z. Sanchez
+[push]
+	default = simple
+[url "https://"]
+	insteadOf = git://
