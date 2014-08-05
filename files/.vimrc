@@ -7,7 +7,7 @@ let g:neobundle_default_git_protocol = 'git'
 
 let cwd=getcwd()
 
-cd ~/code/etc/vim-settings/
+cd ~/vim-settings/
 source main.vim
 
 cd `=cwd`
