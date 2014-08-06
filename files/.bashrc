@@ -138,3 +138,6 @@ ff-dev() {
   source bin/activate
   cd $ORIGINAL_CWD
 }
+
+# disable ctrl-s and ctrl-q as flow control
+stty -ixon
