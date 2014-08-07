@@ -5,3 +5,5 @@
 	default = simple
 [url "https://"]
 	insteadOf = git://
+[core]
+	editor = vim

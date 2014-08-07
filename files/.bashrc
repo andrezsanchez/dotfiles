@@ -86,6 +86,15 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+
+# if we're on Mac
+if [[ `uname -a` =~ ^Darwin ]]; then
+  # ls colors for mac
+  export CLICOLOR=1
+  export LSCOLORS=ExFxBxDxCxegedabagacad
+  alias ls='ls -GFh'
+fi
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
