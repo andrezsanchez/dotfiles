@@ -122,6 +122,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+EDITOR=vim
 VIMSETTINGS=~/code/etc/vim-settings
 
 mkcd() { mkdir -p "$@" && cd "$_"; }
