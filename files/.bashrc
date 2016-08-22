@@ -127,9 +127,6 @@ VIMSETTINGS=~/code/etc/vim-settings
 
 mkcd() { mkdir -p "$@" && cd "$_"; }
 
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/code/go/gocode
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -137,13 +134,11 @@ fi
 
 alias tmux="tmux -2"
 
-# firefox addon development
-ff-dev() {
-  ORIGINAL_CWD=$PWD
-  cd code/etc/addon-sdk
-  source bin/activate
-  cd $ORIGINAL_CWD
-}
+alias irssi="TERM=screen-256color irssi"
 
 # disable ctrl-s and ctrl-q as flow control
 stty -ixon
+
+alias clip="xclip -selection clipboard"
+
+alias vim=nvim
