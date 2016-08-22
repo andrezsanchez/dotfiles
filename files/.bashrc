@@ -142,3 +142,4 @@ stty -ixon
 alias clip="xclip -selection clipboard"
 
 alias vim=nvim
+xmodmap .Xmodmap
