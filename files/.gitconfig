@@ -6,4 +6,15 @@
 [url "https://"]
 	insteadOf = git://
 [core]
-	editor = vim
+  editor = vim
+[alias]
+  co = checkout
+  s = status
+  ss = stash save --include-untracked
+  sp = stash pop
+  sl = stash list
+  b = branch
+  fp = fetch -p
+  mm = "!f(){ git checkout master && git fetch -p && git pull origin master; };f"
+  bn = rev-parse --abbrev-ref HEAD
+  sw = switch

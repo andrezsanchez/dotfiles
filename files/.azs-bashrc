@@ -1,13 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -23,10 +13,6 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -38,41 +24,11 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
+    tmux-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1="\e[0;32m[\w]\e[m\$ "
-else
-    PS1="[\w]\$ "
-    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -95,22 +51,6 @@ if [[ `uname -a` =~ ^Darwin ]]; then
   alias ls='ls -GFh'
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-alias ed='ed -p:'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -123,6 +63,7 @@ if ! shopt -oq posix; then
 fi
 
 EDITOR=vim
+PAGER=less
 VIMSETTINGS=~/code/etc/vim-settings
 
 mkcd() { mkdir -p "$@" && cd "$_"; }
@@ -132,14 +73,31 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-alias tmux="tmux -2"
-
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+#alias tmux="tmux -2"
+alias ed='ed -p:'
 alias irssi="TERM=screen-256color irssi"
+alias xc="xclip -selection clipboard"
+
+reload-source() {
+  source ~/.azs-bashrc
+}
 
 # disable ctrl-s and ctrl-q as flow control
 stty -ixon
 
-alias clip="xclip -selection clipboard"
+# xmodmap .Xmodmap
 
-alias vim=nvim
-xmodmap .Xmodmap
+alias wwit="date "+%g.%V""
+
+PATH=$PATH:$(yarn global bin)
+
+PATH=$HOME/code/etc/git-scripts/bin:$PATH
+
+alias wwit="date "+%g.%V""
+export FLAGS_chum_cache_max_gb=250
+export uu=user/asanchez
+
+export VAULT_ADDR=https://vault.zooxlabs.com:8200
